@@ -13,7 +13,7 @@ Sentry.init({
   // of transactions for performance monitoring.
   // We recommend adjusting this value in production
   tracesSampleRate: 1.0,
-  release: process.env.VERSION,
+  release: process.env.RELEASE_VERSION,
 });
 
 Sentry.addBreadcrumb({
@@ -36,9 +36,13 @@ function hyewonOcurredError() {
   throw new Error("this is my new ERRRRRRRORRRRR");
 }
 
+function hyewonOcurredErrorVersion2() {
+  throw new Error("VERSION 2 : this is my new ERRRRRRRORRRRR");
+}
+
 setTimeout(() => {
   try {
-    hyewonOcurredError();
+    hyewonOcurredErrorVersion2();
   } catch (e) {
     Sentry.addBreadcrumb({
       level: "error",
